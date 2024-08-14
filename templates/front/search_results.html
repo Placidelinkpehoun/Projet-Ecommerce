@@ -1,0 +1,167 @@
+{% load static %}
+{% include "./header.html" %}
+
+{% if results %}
+    {% for produit in results %}
+        
+<div class="rts-chop-details-area rts-section-gap bg_light-1">
+        <div class="container">
+            <div class="shopdetails-style-1-wrapper">
+                <div class="row g-5">
+                    <div class="col-xl-8 col-lg-8 col-md-12">
+                        <div class="product-details-popup-wrapper in-shopdetails">
+                            <div class="rts-product-details-section rts-product-details-section2 product-details-popup-section">
+                                <div class="product-details-popup">
+                                    <div class="details-product-area">
+                                        <div class="product-thumb-area">
+                                            <div class="cursor"></div>
+                                            <div class="thumb-wrapper one filterd-items figure">
+                                                <div class="product-thumb zoom" onmousemove="zoom(event)"
+                                                    style="background-image: url '{{ produit.img_produit.url }}'"><img
+                                                        src="{{ produit.img_produit.url }}" alt="{{ produit.name }}">
+                                                </div>
+                                            </div>
+                                            <div class="thumb-wrapper two filterd-items hide">
+                                                <div class="product-thumb zoom" onmousemove="zoom(event)"
+                                                    style="background-image: url '{{ produit.img_produit.url }}'"><img
+                                                        src="{{ produit.img_produit.url }}" alt="{{ produit.name }}">
+                                                </div>
+                                            </div>
+                                            <div class="thumb-wrapper three filterd-items hide">
+                                                <div class="product-thumb zoom" onmousemove="zoom(event)"
+                                                    style="background-image: url '{{ produit.img_produit.url }}'"><img
+                                                         src="{{ produit.img_produit.url }}" alt="{{ produit.name }}">
+                                                </div>
+                                            </div>
+                                            <div class="thumb-wrapper four filterd-items hide">
+                                                <div class="product-thumb zoom" onmousemove="zoom(event)"
+                                                    style="background-image: url '{{ produit.img_produit.url }}'"><img
+                                                        src="{{ produit.img_produit.url }}" alt="{{ produit.name }}">
+                                                </div>
+                                            </div>
+                                            <div class="thumb-wrapper five filterd-items hide">
+                                                <div class="product-thumb zoom" onmousemove="zoom(event)"
+                                                    style="background-image: url '{{ produit.img_produit.url }}'"><img
+                                                        src="{{ produit.img_produit.url }}" alt="{{ produit.name }}">
+                                                </div>
+                                            </div>
+                                            <div class="product-thumb-filter-group">
+                                                <div class="thumb-filter filter-btn active" data-show=".one"><img
+                                                        src="{{ produit.img_produit.url }}" alt="{{ produit.name }}"></div>
+                                                <div class="thumb-filter filter-btn" data-show=".two"><img
+                                                       src="{{ produit.img_produit.url }}" alt="{{ produit.name }}"></div>
+                                                <div class="thumb-filter filter-btn" data-show=".three"><img
+                                                      src="{{ produit.img_produit.url }}" alt="{{ produit.name }}"></div>
+                                                <div class="thumb-filter filter-btn" data-show=".four"><img
+                                                        src="{{ produit.img_produit.url }}" alt="{{ produit.name }}"></div>
+                                                <div class="thumb-filter filter-btn" data-show=".five"><img
+                                                       src="{{ produit.img_produit.url }}" alt="{{ produit.name }}"></div>
+                                            </div>
+                                        </div>
+                                        <div class="contents">
+                                            <div class="product-status">
+                                                <span class="product-catagory">Dress</span>
+                                                <div class="rating-stars-group">
+                                                    <div class="rating-star"><i class="fas fa-star"></i></div>
+                                                    <div class="rating-star"><i class="fas fa-star"></i></div>
+                                                    <div class="rating-star"><i class="fas fa-star-half-alt"></i></div>
+                                                    <span>10 Reviews</span>
+                                                </div>
+                                            </div>
+                                            <h2 class="product-title">{{ produit.name }}</h2>
+                                            
+                                            <p class="mt--20 mb--20">
+                                                Priyoshop has brought to you the Hijab 3 Pieces Combo Pack PS23. It is a
+                                                completely modern design and you feel comfortable to put on this hijab.
+                                                Buy it at the best price.
+                                            </p>
+                                            <span class="product-price mb--15 d-block" style="color: #DC2626; font-weight: 600;"> {{ produit.prix }}$<!--<span class="old-price ml--15">$69.35</span>--></span>
+                                            <div class="variable-product-type mb--15">
+                                                <div class="single-select">
+                                                    <span class="label">Size</span>
+                                                    <select>
+                                                        <option data-display="01 Miter">01 Miter</option>
+                                                        <option value="1">1 miter</option>
+                                                        <option value="2">2 miter</option>
+                                                        <option value="3">3 miter</option>
+                                                        <option value="4">5 miter</option>
+                                                    </select>
+                                                </div>
+                                                <div class="single-select">
+                                                    <span class="label">Weight</span>
+                                                    <select>
+                                                        <option data-display="5 kg">5 kg</option>
+                                                        <option value="1">5kg</option>
+                                                        <option value="2">7kg</option>
+                                                        <option value="3">10kg</option>
+                                                        <option value="4">15kg</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="product-bottom-action">
+                                                <div class="cart-edits">
+                                                    <div class="quantity-edit action-item">
+                                                        <button class="button"><i class="fal fa-minus minus"></i></button>
+                                                        <input type="text" class="input" value="01"/>
+                                                        <button class="button plus">+<i class="fal fa-plus plus"></i></button>
+                                                    </div>
+                                                </div>
+                                                <a href="#" class="rts-btn btn-primary radious-sm with-icon">
+                                                    <div class="btn-text">
+                                                        Add To Cart
+                                                    </div>
+                                                    <div class="arrow-icon">
+                                                        <i class="fa-regular fa-cart-shopping"></i>
+                                                    </div>
+                                                    <div class="arrow-icon">
+                                                        <i class="fa-regular fa-cart-shopping"></i>
+                                                    </div>
+                                                </a>
+                                                <a href="javascript:void(0);" class="rts-btn btn-primary ml--20"><i class="fa-light fa-heart"></i></a>
+                                            </div>
+                                            <div class="product-uniques">
+                                                <span class="sku product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">SKU: </span> BO1D0MX8SJ</span>
+                                                <span class="catagorys product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">Categories: </span> {{ categories.name }}</span>
+                                                <span class="tags product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">Tags: </span> fashion, t-shirts, Men</span>
+                                                <span class="tags product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">LIFE:: </span>  6 Months</span>
+                                                <span class="tags product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">Type: </span> original</span>
+                                                <span class="tags product-unipue mb--10"><span style="font-weight: 400; margin-right: 10px;">Category: </span> Beverages, Dairy & Bakery</span>
+                                            </div>
+                                            <div class="share-option-shop-details">
+                                                <div class="single-share-option">
+                                                    <div class="icon">
+                                                        <i class="fa-regular fa-heart"></i>
+                                                    </div>
+                                                    <span>Add To Wishlist</span>
+                                                </div>
+                                                <div class="single-share-option">
+                                                    <div class="icon">
+                                                        <i class="fa-solid fa-share"></i>
+                                                    </div>
+                                                    <span>Share On social</span>
+                                                </div>
+                                                <div class="single-share-option">
+                                                    <div class="icon">
+                                                        <i class="fa-light fa-code-compare"></i>
+                                                    </div>
+                                                    <span>Compare</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     {% endfor %}
+{% else %}
+    <p>No results found.</p>
+{% endif %}
+
+
+
+{% include "./footer.html" %}
