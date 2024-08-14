@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from dashboard.models import Categories, Produit, Message
 from .models import Commande, Commande_Produit
+from .forms import Registration_Form
+from django.contrib.auth import login, authenticate, logout
+from django.views.decorators.csrf import csrf_protect
 
 def home(request):
     return render(request, 'front/home.html')
@@ -33,16 +36,42 @@ def invoice(request):
     return render(request, 'front/invoice.html')
 
 
+@csrf_protect
 def login(request):
-    return render(request, 'front/login.html')
+    print('bonjour')
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            print(email, password)
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index')
+            else:
+                return render(request, 'front/login.html', {'errors': 'Email ou mot de passe invalide. Si vous n\'avez pas de compte créez-en un.'})
+        else:
+            return render(request, 'front/login.html', {})
+    else:
+        return redirect('home')
 
 
 def privacy_policy(request):
     return render(request, 'front/privacy-policy.html')
 
 
+@csrf_protect
 def register(request):
-    return render(request, 'front/register.html')
+    if request.method == 'POST':
+        registration_form = Registration_Form(request.POST)
+        if registration_form.is_valid():
+            user = registration_form.save()
+            login(request, user)
+            return redirect('index')
+    else:
+        registration_form = Registration_Form()  # Crée un formulaire vide pour GET
+
+    return render(request, 'front/register.html', {'registration_form': registration_form})
 
 
 def shop_compare(request):

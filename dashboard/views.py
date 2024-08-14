@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from .models import Produit, Categories
+from .forms import Add_Produit_Form, Add_Categorie_Form
 
 # Create your views here.
 
@@ -46,8 +47,19 @@ def oder_details(request):
 def new_page(request):
     return render(request, 'dashboard/new-page.html')
 
+
 def new_category(request):
-    return render(request, 'dashboard/new-category.html')
+    if request.method == 'POST':
+        add_categorie_form= Add_Categorie_Form(request.POST, request.FILES)
+        if add_categorie_form.is_valid():
+            add_categorie_form.save()
+            return redirect('category_list')
+        else:
+            return render(request, 'dashboard/new-category.html', {'add_categorie_form': add_categorie_form})
+    else:
+        add_categorie_form = Add_Categorie_Form() 
+    return render(request, 'dashboard/new-category.html', {'add_categorie_form': add_categorie_form})
+
 
 def home_menu_icon_hover(request):
     return render(request, 'dashboard/home-menu-icon-hover.html')
@@ -95,7 +107,17 @@ def all_roles(request):
     return render(request, 'dashboard/all-roles.html')
 
 def add_product(request):
-    return render(request, 'dashboard/add-product.html')
+    if request.method == 'POST':
+        add_produit_form = Add_Produit_Form(request.POST, request.FILES)
+        if add_produit_form.is_valid():
+            add_produit_form.save()
+            return redirect('product_list')
+        else:
+            return render(request, 'dashboard/add-product.html', {'add_produit_form': add_produit_form})
+    else:
+        add_produit_form = Add_Produit_Form() 
+        return render(request, 'dashboard/add-product.html', {'add_produit_form': add_produit_form})
+
 
 def add_new_user(request):
     return render(request, 'dashboard/add-new-user.html')
@@ -115,23 +137,15 @@ def category_list(request):
 
 def add_category(request):
     if request.method == 'POST':
-        # Récupérer les données du formulaire
         category_name = request.POST.get('name')
         #icon_file = request.FILES.get('filename')
-
-        # Si un fichier est téléchargé, sauvegarder ce fichier
         '''if icon_file:
             fs = FileSystemStorage()
             filename = fs.save(icon_file.name, icon_file)'''
 
-        # Créer une nouvelle instance de Categories
         new_category = Categories.objects.create(name=category_name, )
-
-        # Sauvegarder la nouvelle catégorie dans la base de données
         new_category.save()
-
-        # Rediriger vers la liste des catégories ou vers une autre page après la soumission
-        return redirect('category_list')  # Assurez-vous d'avoir une URL avec ce nom
+        return redirect('category_list')
     
     else:
          return render(request, 'dashboard/new-category.html')

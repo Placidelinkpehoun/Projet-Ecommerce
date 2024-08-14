@@ -2,9 +2,11 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class Categories(models.Model):
-    id_categorie = models.IntegerField(default=1, primary_key=True)
+    id_categorie = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     img_categorie = models.ImageField(upload_to='front/images/category/', null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class Produit(models.Model):
     id_produit = models.IntegerField(default=1, primary_key=True)
