@@ -4,6 +4,7 @@ from .models import Commande, Commande_Produit
 from .forms import Registration_Form
 from django.contrib.auth import login, authenticate, logout
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request, 'front/home.html')
@@ -14,6 +15,12 @@ def index(request):
     produits = Produit.objects.all()
     #commande = get_object_or_404(Commande_Produit, produits_id=produits.id_produit)
     return render(request, 'front/index.html', {'categories': categories, 'produits': produits})
+
+'''def header(request):
+    connect = False
+    if request.user.is_authenticated:
+        connect = True
+    return render(request, 'front/header.html', {'connect': connect})'''
 
 
 def index_two(request):
@@ -37,13 +44,11 @@ def invoice(request):
 
 
 @csrf_protect
-def login(request):
-    print('bonjour')
+def login_front(request):
     if not request.user.is_authenticated:
         if request.method == 'POST':
             email = request.POST.get('email')
             password = request.POST.get('password')
-            print(email, password)
             user = authenticate(request, email=email, password=password)
             if user is not None:
                 login(request, user)
@@ -53,8 +58,11 @@ def login(request):
         else:
             return render(request, 'front/login.html', {})
     else:
-        return redirect('home')
+        return redirect('index')
 
+def logout_front(request):
+    logout(request)
+    return redirect('login_front')
 
 def privacy_policy(request):
     return render(request, 'front/privacy-policy.html')
@@ -62,16 +70,16 @@ def privacy_policy(request):
 
 @csrf_protect
 def register(request):
+    connect = False
+    registration_form = Registration_Form()
     if request.method == 'POST':
         registration_form = Registration_Form(request.POST)
         if registration_form.is_valid():
             user = registration_form.save()
             login(request, user)
+            connect = True
             return redirect('index')
-    else:
-        registration_form = Registration_Form()  # Crée un formulaire vide pour GET
-
-    return render(request, 'front/register.html', {'registration_form': registration_form})
+    return render(request, 'front/register.html', {'registration_form': registration_form, 'connect': connect})
 
 
 def shop_compare(request):
@@ -203,7 +211,8 @@ def add_produits(request, produit_id):
     else:
         produits = Produit.objects.all()
         return render(request, 'front/index.html', {'produits': produits})
-    
+
+@login_required(login_url='login_front')
 def cart(request):
     commande = Commande_Produit.objects.all()
     count = 0

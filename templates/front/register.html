@@ -279,9 +279,16 @@
                             </div>
                             <div class="input-wrapper">
                                 <label for="password">Password*</label>
-                                {{ registration_form.password }}<!--<input type="password" id="password">-->
+                                {{ registration_form.password1 }}<!--<input type="password" id="password">-->
                                 {% if registration_form.password.errors %}
                                     <div class="error">{{ registration_form.password.errors }}</div>
+                                {% endif %}
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="password">Confirm Password*</label>
+                                {{ registration_form.password2 }}<!--<input type="password" id="password">-->
+                                {% if registration_form.password2.errors %}
+                                    <div class="error">{{ registration_form.password2.errors }}</div>
                                 {% endif %}
                             </div>
                            
@@ -298,7 +305,7 @@
                                         <img src="{% static 'front/images/form/facebook.svg' %}" alt="login">
                                     </a>
                                 </div>
-                                <p>Already Have Account? <a href="#">Login</a></p>
+                                <p>Already Have Account? <a href="{% url 'login_front' %}">Login</a></p>
                             </div>
                         </form>
                     </div>
