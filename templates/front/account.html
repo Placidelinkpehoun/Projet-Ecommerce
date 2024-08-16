@@ -220,8 +220,8 @@
             </div>
         </div>
         <div class="buton-area-bottom">
-            <a href="login.html" class="rts-btn btn-primary">Sign In</a>
-            <a href="register.html" class="rts-btn btn-primary">Sign Up</a>
+            <a href="{% url 'login_front' %}" class="rts-btn btn-primary">Sign In</a>
+            <a href="{% url 'register' %}" class="rts-btn btn-primary">Sign Up</a>
         </div>
      </div>
     <!-- button area wrapper end -->
@@ -236,7 +236,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="navigator-breadcrumb-wrapper">
-                        <a href="index.html">Home</a>
+                        <a href="{% url 'index' %}">Home</a>
                         <i class="fa-regular fa-chevron-right"></i>
                         <a class="current" href="index.html">Account</a>
                     </div>
@@ -262,7 +262,7 @@
                     <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab" tabindex="0">
                             <div class="dashboard-account-area">
-                                <h2 class="title">Hello Raisa! (Not Raisa?) <a href="login.html">Log Out.</a></h2>
+                                <h2 class="title">Hello {{users.username}}! (Not {{users.username}}?) <a href="{% url 'logout_front' %}">Log Out.</a></h2>
                                 <p class="disc">
                                     From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.
                                 </p>

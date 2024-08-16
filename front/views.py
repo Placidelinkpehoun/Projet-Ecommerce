@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from dashboard.models import Categories, Produit, Message
 from .models import Commande, Commande_Produit
 from .forms import Registration_Form
+from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.decorators import login_required
@@ -263,7 +264,9 @@ def blog(request):
 
 
 def account(request):
-    return render(request, 'front/account.html')
+    user = request.user
+    users = User.objects.get(username=user.username)
+    return render(request, 'front/account.html', {'users': users})
 
 
 def about(request):
