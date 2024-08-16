@@ -8,7 +8,7 @@ from .forms import Add_Produit_Form, Add_Categorie_Form
 def index_dash(request):
     return render(request, 'dashboard/index_dashboard.html')
 
-def login(request):
+def login_dashboard(request):
     return render(request, 'dashboard/login.html')
 
 def sign_up(request):

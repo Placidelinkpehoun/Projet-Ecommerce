@@ -13,7 +13,6 @@ def home(request):
 def index(request):
     categories = Categories.objects.all()
     produits = Produit.objects.all()
-    #commande = get_object_or_404(Commande_Produit, produits_id=produits.id_produit)
     return render(request, 'front/index.html', {'categories': categories, 'produits': produits})
 
 '''def header(request):
@@ -45,20 +44,22 @@ def invoice(request):
 
 @csrf_protect
 def login_front(request):
-    if not request.user.is_authenticated:
-        if request.method == 'POST':
-            email = request.POST.get('email')
-            password = request.POST.get('password')
-            user = authenticate(request, email=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('index')
-            else:
-                return render(request, 'front/login.html', {'errors': 'Email ou mot de passe invalide. Si vous n\'avez pas de compte créez-en un.'})
-        else:
-            return render(request, 'front/login.html', {})
-    else:
+    if request.user.is_authenticated:
         return redirect('index')
+
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            if user.is_superuser:
+                return render(request, 'dashboard/index_dashboard.html', {})
+            return redirect('index')
+        else:
+            return render(request, 'front/login.html', {'errors': 'Email ou mot de passe invalide. Si vous n\'avez pas de compte créez-en un.'})
+    else:
+        return render(request, 'front/login.html', {})
 
 def logout_front(request):
     logout(request)
@@ -184,18 +185,16 @@ def checkout(request):
     return render(request, 'front/checkout.html')
 
 
+@login_required(login_url='login_front')
 def add_produits(request, produit_id):
     if request.method == 'POST':
         produits = get_object_or_404(Produit, id_produit=produit_id)
-        if request.user.is_authenticated:
-            user = request.user
-        else:
-            user = None
-        commande = Commande.objects.filter(user=user)
-        if commande.exists():
+        user = request.user
+        commande, created = Commande.objects.get_or_create(user=user)
+        ''' if commande.exists():
             commande = commande.first()
         else:
-            commande = Commande.objects.create(user=user)
+            commande = Commande.objects.create(user=user)'''
 
         commande_produit, created = Commande_Produit.objects.get_or_create(
             commande=commande,
@@ -203,10 +202,9 @@ def add_produits(request, produit_id):
         )
         if not created:
             commande_produit.quantite += 1
-            commande_produit.save()
         else:
             commande_produit.quantite = 1
-            commande_produit.save()
+        commande_produit.save()
         return redirect('cart')
     else:
         produits = Produit.objects.all()
@@ -215,6 +213,12 @@ def add_produits(request, produit_id):
 @login_required(login_url='login_front')
 def cart(request):
     commande = Commande_Produit.objects.all()
+    try:    
+        commande_user = Commande.objects.get(user=request.user)
+    except Commande.DoesNotExist:
+        commande_user = Commande.objects.create(user=request.user)
+    commande_produits = Commande_Produit.objects.filter(commande=commande_user)
+
     count = 0
     for command in commande:
         count += 1
@@ -223,7 +227,13 @@ def cart(request):
         header_commande = Commande_Produit.objects.all()
     else:
         header_commande = Commande_Produit.objects.all()[count4:count]
-    return render(request, 'front/cart.html', {'commande': commande, 'header_commande': header_commande,})
+
+    context = {
+        'commande': commande, 
+        'header_commande': header_commande, 
+        'commande_produits': commande_produits
+    }
+    return render(request, 'front/cart.html', context)
 
 def delete_produit(request, commande_id):
     commande_produit = get_object_or_404(Commande_Produit, id=commande_id)

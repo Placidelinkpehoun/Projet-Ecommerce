@@ -263,16 +263,21 @@
                             <img class="mb--10" src="{% static 'front/images/logo/fav.png' %}" alt="logo">
                         </div>
                         <h3 class="title">Login Into Your Account</h3>
-                        <form action="{% url 'login' %}" class="registration-form" method="POST">
+                        <form action="{% url 'login_front' %}" class="registration-form" method="POST">
                             {% csrf_token %}
                             <div class="input-wrapper">
-                                <label for="email">Email*</label>
-                                <input type="email" id="email" name="email" required>
+                                <label for="email">Username*</label>
+                                <input type="text" id="username" name="username" required>
                             </div>
                             <div class="input-wrapper">
                                 <label for="password">Password*</label>
                                 <input type="password" id="password" name="password">
                             </div>
+                            {% if errors %}
+                                <div class="error-message">
+                                    <p style="color: red;">{{ errors }}</p>
+                                </div>
+                            {% endif %}
                             <button class="rts-btn btn-primary" type="submit">Login Account</button>
                             <div class="another-way-to-registration">
                                 <div class="registradion-top-text">
