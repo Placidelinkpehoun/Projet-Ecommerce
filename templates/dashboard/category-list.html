@@ -76,7 +76,11 @@
                                             {% for category in categories %}
                                             <li class="product-item gap14">
                                                 <div class="image no-bg">
-                                                    <img src="{{category.img_categorie.url}}" alt="">
+                                                    {% if category.img_categorie %}
+                                                        <img src="{{category.img_categorie.url}}" alt="">
+                                                    {% else %}
+                                                        <img src="https://dummyimage.com/600x400/2275fc/000&text=Pas+d'image+disponible+pour+cette+categorie" alt="">
+                                                    {% endif %}
                                                 </div>
                                                 <div class="flex items-center justify-between gap20 flex-grow">
                                                     <div class="name">
@@ -97,7 +101,7 @@
                                                             <i class="icon-edit-3"></i>
                                                         </div>
                                                         <div class="item trash">
-                                                            <i class="icon-trash-2"></i>
+                                                            <a href="{% url 'delete_produit_dash' category.id_categorie %}"><i class="icon-trash-2"></i></a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -133,13 +137,13 @@
                         </div>
                         <!-- /main-content-wrap -->
                         <!-- bottom-page -->
-                        <script src="{% static 'js/jquery.min.js' %}"></script>
-                        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-                        <script src="{% static 'js/bootstrap-select.min.js' %}"></script>
-                        <script src="{% static 'js/zoom.js' %}"></script>
-                        <script src="{% static 'js/switcher.js' %}"></script>
-                        <script src="{% static 'js/theme-settings.js' %}"></script>
-                        <script src="{% static 'js/main.js' %}"></script></body>
+                        <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
+                        <script src="{% static 'dashboard/js/bootstrap.min.js' %}"></script>
+                        <script src="{% static 'dashboard/js/bootstrap-select.min.js' %}"></script>
+                        <script src="{% static 'dashboard/js/zoom.js' %}"></script>
+                        <script src="{% static 'dashboard/js/switcher.js' %}"></script>
+                        <script src="{% static 'dashboard/js/theme-settings.js' %}"></script>
+                        <script src="{% static 'dashboard/js/main.js' %}"></script></body>
 
 
 <!-- Mirrored from themesflat.co/html/remos/category-list.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 05 Aug 2024 08:39:41 GMT -->

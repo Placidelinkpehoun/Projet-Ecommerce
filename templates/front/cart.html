@@ -292,7 +292,11 @@
                                     <a href="{% url 'delete_produit' commande_produit.id %}"><i class="fa-regular fa-x"></i></a>
                                 </div>
                                 <div class="thumbnail">
-                                    <img src="{{ commande_produit.produits.img_produit.url }}" alt="shop">
+                                    {% if commande_produit.produits.img_produit %}
+                                        <img src="{{ commande_produit.produits.img_produit.url }}" alt="shop">
+                                    {% else %}
+                                        <img src="https://dummyimage.com/600x400/d19d19/000&text=Pas+d'image+disponible+pour+ce+produit" alt="shop">
+                                    {% endif %}
                                 </div>
                                 <div class="information">
                                     <h6 class="title">{{ commande_produit.produits.name }}</h6>

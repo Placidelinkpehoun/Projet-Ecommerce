@@ -181,19 +181,19 @@
                         </li>
                         <li>
                             <a href="#" class="menu-item">
-                                <img src="assets/images/icons/08.svg" alt="icons">
+                                <img src="front/assets/images/icons/08.svg" alt="icons">
                                 <span>Frozen Foods</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="menu-item">
-                                <img src="assets/images/icons/09.svg" alt="icons">
+                                <img src="front/assets/images/icons/09.svg" alt="icons">
                                 <span>Grocery &amp; Staples</span>
                             </a>
                         </li>
                         <li>
                             <a href="#" class="menu-item">
-                                <img src="assets/images/icons/10.svg" alt="icons">
+                                <img src="ront/assets/images/icons/10.svg" alt="icons">
                                 <span>Other Items</span>
                             </a>
                         </li>
@@ -510,7 +510,11 @@
                                                     </span>
                                                     <i class="fa-solid fa-bookmark"></i>
                                                 </div>
-                                                <img src="{{produit.img_produit.url}}" alt="grocery">
+                                                {% if product.img_produit %}
+                                                    <img src={{product.img_produit.url}} alt="">
+                                                {% else %}
+                                                    <img src="https://dummyimage.com/600x400/629D23/000&text=Pas+d'image+disponible+pour+ce+produit" alt="">
+                                                {% endif %}
                                             </a>
                                             <div class="action-share-option">
                                                 <div class="single-action openuptip message-show-action" data-flow="up" title="Add To Wishlist">
@@ -575,7 +579,11 @@
                                                 </span>
                                                 <i class="fa-solid fa-bookmark"></i>
                                             </div>
-                                            <img src="{{produit.img_produit.url}}" alt="grocery">
+                                            {% if product.img_produit %}
+                                                <img src={{product.img_produit.url}} alt="">
+                                            {% else %}
+                                                <img src="https://dummyimage.com/600x400/629D23/000&text=Pas+d'image+disponible+pour+ce+produit" alt="">
+                                            {% endif %}
                                         </a>
                                         <div class="body-content">
                                             <div class="title-area-left">

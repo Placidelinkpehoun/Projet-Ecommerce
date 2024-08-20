@@ -254,7 +254,11 @@
                                         <div class="cart-item-1 border-top">
                                             <div class="img-name">
                                                 <div class="thumbanil">
-                                                    <img src="{{ commande_produit.produits.img_produit.url }}" alt="">
+                                                    {% if commande_produit.produits.img_produit %}
+                                                        <img src="{{ commande_produit.produits.img_produit.url }}" alt="shop">
+                                                    {% else %}
+                                                        <img src="https://dummyimage.com/600x400/d19d19/000&text=Pas+d'image+disponible+pour+ce+produit" alt="shop">
+                                                    {% endif %}
                                                 </div>
                                                 <div class="details">
                                                     <a href="{% url 'shop_details' %}">

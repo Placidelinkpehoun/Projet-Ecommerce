@@ -449,10 +449,11 @@
                 {% for categorie in categories %}
                 <div class="swiper-slide">
                   <a href="{% url 'shop_grid_sidebar' categorie.id_categorie %}" class="single-category-one">
-                    <img
-                      src="{{ categorie.img_categorie.url }}"
-                      alt="category"
-                    />
+                    {% if category.img_categorie %}
+                        <img src="{{category.img_categorie.url}}" alt="">
+                    {% else %}
+                        <img src="https://dummyimage.com/600x400/629D23/000&text=Pas+d'image+disponible+pour+cette+categorie" alt="">
+                    {% endif %}
                     <p>{{ categorie.name }}</p>
                   </a>
                 </div>
@@ -733,7 +734,11 @@
                             </span>
                             <i class="fa-solid fa-bookmark"></i>
                           </div>
-                          <img src="{{produit.img_produit.url}}" alt="grocery" />
+                          {% if product.img_produit %}
+                              <img src={{product.img_produit.url}} alt="">
+                          {% else %}
+                              <img src="https://dummyimage.com/600x400/629D23/000&text=Pas+d'image+disponible+pour+ce+produit" alt="">
+                          {% endif %}
                         </a>
                         <div class="action-share-option">
                           <div
@@ -850,7 +855,11 @@
                             </span>
                             <i class="fa-solid fa-bookmark"></i>
                           </div>
-                          <img src="{{produit.img_produit.url}}" alt="grocery" />
+                          {% if product.img_produit %}
+                              <img src={{product.img_produit.url}} alt="">
+                          {% else %}
+                              <img src="https://dummyimage.com/600x400/629D23/000&text=Pas+d'image+disponible+pour+ce+produit" alt="">
+                          {% endif %}
                         </a>
                         <div class="body-content">
                           <a href="{% url 'shop_details' %}">
@@ -996,7 +1005,11 @@
                             </span>
                             <i class="fa-solid fa-bookmark"></i>
                           </div>
-                          <img src="{{ produit.img_produit.url }}" alt="grocery" />
+                          {% if product.img_produit %}
+                              <img src={{product.img_produit.url}} alt="">
+                          {% else %}
+                              <img src="https://dummyimage.com/600x400/629D23/000&text=Pas+d'image+disponible+pour+ce+produit" alt="">
+                          {% endif %}
                         </a>
                         <div class="action-share-option">
                           <span
@@ -1194,7 +1207,11 @@
                         </span>
                         <i class="fa-solid fa-bookmark"></i>
                       </div>
-                      <img src="{{ produit.img_produit.url }}" alt="grocery" />
+                      {% if product.img_produit %}
+                        <img src={{product.img_produit.url}} alt="">
+                      {% else %}
+                        <img src="https://dummyimage.com/600x400/629D23/000&text=Pas+d'image+disponible+pour+ce+produit" alt="">
+                      {% endif %}
                     </a>
                     <div class="body-content">
                       <a href="{% url 'shop_details' %}">
@@ -1236,7 +1253,7 @@
               <!-- single blog area start -->
               <div class="single-blog-area-start">
                 <a href="{% url 'blog_details' %}" class="thumbnail">
-                  <img src="{% static 'images/blog/01.jpg' %}" alt="blog-area" />
+                  <img src="{% static 'front/images/blog/01.jpg' %}" alt="blog-area" />
                 </a>
                 <div class="blog-body">
                   <div class="top-area">
@@ -1272,7 +1289,7 @@
               <!-- single blog area start -->
               <div class="single-blog-area-start">
                 <a href="{% url 'blog_details' %}" class="thumbnail">
-                  <img src="{% static 'images/blog/02.jpg' %}" alt="blog-area" />
+                  <img src="{% static 'front/images/blog/02.jpg' %}" alt="blog-area" />
                 </a>
                 <div class="blog-body">
                   <div class="top-area">
@@ -1308,7 +1325,7 @@
               <!-- single blog area start -->
               <div class="single-blog-area-start">
                 <a href="{% url 'blog_details' %}" class="thumbnail">
-                  <img src="{% static 'images/blog/03.jpg' %}" alt="blog-area" />
+                  <img src="{% static 'front/images/blog/03.jpg' %}" alt="blog-area" />
                 </a>
                 <div class="blog-body">
                   <div class="top-area">
@@ -1343,7 +1360,7 @@
               <!-- single blog area start -->
               <div class="single-blog-area-start">
                 <a href="{% url 'blog_details' %}" class="thumbnail">
-                  <img src="{% static 'images/blog/04.jpg' %}" alt="blog-area" />
+                  <img src="{% static 'front/images/blog/04.jpg' %}" alt="blog-area" />
                 </a>
                 <div class="blog-body">
                   <div class="top-area">
@@ -1495,7 +1512,7 @@
           </div>
           <div class="payment-access">
             <span>Payment Accepts:</span>
-            <img src="{% static 'images/payment/01.png' %}" alt="" />
+            <img src="{% static 'front/images/payment/01.png' %}" alt="" />
           </div>
         </div>
       </div>
@@ -1515,8 +1532,8 @@
           </p>
           <a href="#" class="playstore-app-area">
             <span>Download App</span>
-            <img src=" {% static 'images/payment/02.png' %}" alt="" />
-            <img src="{% static 'images/payment/03.png' %}" alt="" />
+            <img src=" {% static 'front/images/payment/02.png' %}" alt="" />
+            <img src="{% static 'front/images/payment/03.png' %}" alt="" />
           </a>
         </div>
       </div>

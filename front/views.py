@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from dashboard.models import Categories, Produit, Message
+from dashboard.models import Categories, Produit
 from .models import Commande, Commande_Produit
 from .forms import Registration_Form
 from django.contrib.auth.models import User
@@ -295,7 +295,5 @@ def contact_view(request):
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        Message.objects.create(name=name, email=email, subject=subject, message=message)
-
     context = {'name': name, 'email': email, 'subject': subject, 'message': message}
     return render(request, 'front/contact.html', context)

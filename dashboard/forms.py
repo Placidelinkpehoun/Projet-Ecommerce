@@ -10,7 +10,7 @@ class Add_Produit_Form(forms.ModelForm):
             'prix': forms.NumberInput(attrs={'class': 'mb-10', 'id': "quantite", 'type': "number", 'placeholder': "",}),
             #'auteur': forms.Select(attrs={'class': 'form-control', 'id': "auteur", 'type': "text", 'placeholder': "Auteur", 'data-sb-validations': "required"}),
             'categorie': forms.Select(attrs={'class': '', 'id': "categoriee", 'type': "text", 'placeholder': "Catégorie"}),
-            'img_produit': forms.ClearableFileInput(attrs={'class': '', 'id': "image", 'type': "file", 'placeholder': ""}),
+            'img_produit': forms.ClearableFileInput(attrs={'class': '', 'id': "image", 'type': "file", 'placeholder': "", 'required': False}),
         }
 
 class Add_Categorie_Form(forms.ModelForm):
@@ -19,5 +19,5 @@ class Add_Categorie_Form(forms.ModelForm):
         fields = ['name', 'img_categorie']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'flex-grow', 'id': "name_categorie", 'type': "text", 'placeholder': "Enter category name"}),
-            #'img_categorie': forms.ClearableFileInput(attrs={'class': '', 'id': "image", 'type': "file", 'placeholder': ""}),
+            'img_categorie': forms.ClearableFileInput(attrs={'class': '', 'id': "image", 'type': "file", 'placeholder': "", 'required': False}),
         }

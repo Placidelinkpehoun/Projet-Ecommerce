@@ -89,7 +89,11 @@
                                             {% for product in products %}
                                             <li class="product-item gap14">
                                                 <div class="image no-bg">
-                                                    <img src={{product.img_produit.url}} alt="">
+                                                    {% if product.img_produit %}
+                                                        <img src={{product.img_produit.url}} alt="">
+                                                    {% else %}
+                                                        <img src="https://dummyimage.com/600x400/2275fc/000&text=Pas+d'image+disponible+pour+ce+produit" alt="">
+                                                    {% endif %}
                                                 </div>
                                                 
                                                 <div class="flex items-center justify-between gap20 flex-grow">
@@ -166,13 +170,13 @@
     <!-- /#wrapper -->
 
     <!-- Javascript -->
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/bootstrap-select.min.js' %}"></script>
-<script src="{% static 'js/zoom.js' %}"></script>
-<script src="{% static 'js/switcher.js' %}"></script>
-<script src="{% static 'js/theme-settings.js' %}"></script>
-<script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
+<script src="{% static 'dashboard/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'dashboard/js/bootstrap-select.min.js' %}"></script>
+<script src="{% static 'dashboard/js/zoom.js' %}"></script>
+<script src="{% static 'dashboard/js/switcher.js' %}"></script>
+<script src="{% static 'dashboard/js/theme-settings.js' %}"></script>
+<script src="{% static 'dashboard/js/main.js' %}"></script>
 
 </body>
 
